@@ -61,19 +61,26 @@ def create_workspace(organization_name, workspace_name, api_token):
 
 
 def create_configuration_version(workspace_id, api_token):
+    print("vrau000")
     endpoint = "{}/workspaces/{}/configuration-versions".format(
         TERRAFORM_API_ENDPOINT, workspace_id
     )
+    print("vrau001 endpoint: {}<-".format(endpoint))
     headers = __build_standard_headers(api_token)
+    print("vrau002 headers: {}<-".format(headers))
     payload = {
         "data": {
             "type": "configuration-versions",
             "attributes": {"auto-queue-runs": False},
         }
     }
+    print("vrau003 payload: {}<-".format(payload))
     response = __post(endpoint, headers, payload)
+    print("vrau004 response: {}<-".format(response))
     cv_id = response["data"]["id"]
+    print("vrau005 cv_id: {}<-".format(cv_id))
     upload_url = response["data"]["attributes"]["upload-url"]
+    print("vrau006 upload_url: {}<-".format(upload_url))
     return cv_id, upload_url
 
 
