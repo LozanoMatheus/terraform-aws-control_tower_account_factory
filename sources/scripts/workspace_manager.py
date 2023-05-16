@@ -19,7 +19,9 @@ def setup_and_run_workspace(
     workspace_id = setup_workspace(
         organization_name, workspace_name, assume_role_arn, role_session_name, api_token
     )
+    print("here000")
     run_id = stage_run(workspace_id, assume_role_arn, role_session_name, api_token)
+    print("here099")
     return run_id
 
 
@@ -45,8 +47,11 @@ def setup_workspace(
 
 # def stage_run(workspace_id, s3_uri, assume_role_arn, api_token):
 def stage_run(workspace_id, assume_role_arn, role_session_name, api_token):
+    print("here002")
     cv_id, upload_url = terraform.create_configuration_version(workspace_id, api_token)
+    print("here003")
     print("Successfully created a new configuration version: {}".format(cv_id))
+    print("here004")
     data = open(LOCAL_CONFIGURATION_PATH, "rb")
     terraform.upload_configuration_content(data, upload_url)
     print(
